@@ -1,0 +1,413 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* =========================================
+   1. ESTILOS GENERALES
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+:root {
+    /* Este color cambiará desde JS constantemente por todo el arcoíris */
+    --green: #82cd21;
+}
+
+body {
+    overflow: hidden;
+    width: 100%;
+    height: 100vh;
+    background: #151626;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -5;
+}
+
+/* =========================================
+   2. CONTENEDOR PRINCIPAL Y REPRODUCTOR
+   ========================================= */
+.main {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none; /* Permite clics al canvas de fondo */
+}
+
+.reproductor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    width: 23%;
+    min-width: 320px;
+    padding: 30px;
+    background: #22233fb6;
+    border-radius: 15px;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    pointer-events: all; /* Activa los clics dentro del reproductor */
+}
+
+.reproductor h1 {
+    color: white;
+    font-size: 1.8em;
+    margin-bottom: 5px;
+    font-weight: 300;
+}
+
+.reproductor p {
+    color: white;
+    font-size: 1.1em;
+    font-weight: 300;
+}
+
+.reproductor p:first-child {
+    margin-bottom: 30px;
+}
+
+.info {
+    margin-top: 50px;
+    min-height: 100px; /* Evita saltos de altura si el título es largo */
+}
+
+/* =========================================
+   3. DISCO (PORTADA)
+   ========================================= */
+.disc {
+    width: 16vw;
+    height: 16vw;
+    min-height: 250px;
+    min-width: 250px;
+    border-radius: 50%;
+    background: #151626;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    position: relative;
+    animation: rotation 30s linear infinite;
+    animation-play-state: paused;
+}
+
+.disc img {
+    filter: brightness(1.2);
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@keyframes rotation {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* =========================================
+   ESTILO PARA EL MENSAJE DEDICADO
+   ========================================= */
+.mensaje-oculto {
+    margin-top: 10px;
+    font-size: 0.9em;
+    color: #e0e0e0; /* Un gris muy clarito para que no opaque el título */
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.4;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* =========================================
+   4. BARRA DE PROGRESO
+   ========================================= */
+.progress-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 50px;
+    margin-bottom: 15px;
+    color: white;
+    font-size: 0.9em;
+    font-weight: 300;
+}
+
+#progressBar {
+    flex-grow: 1;
+    margin: 0 15px;
+    cursor: pointer;
+    accent-color: var(--green); /* Usa la variable de color dinámico */
+    height: 6px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    outline: none;
+    transition: accent-color 0.2s ease;
+}
+
+/* =========================================
+   5. CONTROLES DE LA PLAYLIST Y BOTONES
+   ========================================= */
+.controles-musica {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 15px;
+}
+
+.control-btn {
+    background: #ffffff33;
+    color: white;
+    border: none;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.control-btn.mini {
+    width: 50px;
+    height: 50px;
+}
+
+.control-btn:hover {
+    background: var(--green); /* Toma el color actual de las hojas */
+    transform: scale(1.05);
+}
+
+.control-btn:active {
+    transform: scale(0.95);
+}
+
+.play-icon, .pause-icon {
+    position: absolute;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.play-icon {
+    opacity: 0;
+    transform: scale(1.5);
+}
+
+.pause-icon {
+    opacity: 1;
+    transform: scale(1.8);
+}
+
+.control-btn.paused .play-icon {
+    opacity: 1;
+    transform: scale(2);
+}
+
+.control-btn.paused .pause-icon {
+    opacity: 0;
+    transform: scale(1.5);
+}
+
+/* =========================================
+   6. CONTENEDOR DE HOJAS Y ANIMACIÓN BASE
+   ========================================= */
+.hojas-container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: scale-down 2s ease-out;
+    pointer-events: none;
+}
+
+@keyframes scale-down {
+    0% { transform: scale(3); }
+    100% { transform: scale(1); }
+}
+
+/* =========================================
+   7. ESTRUCTURA DE LAS HOJAS
+   ========================================= */
+.hoja {
+    width: 30px;
+    height: 200px;
+    border-radius: 100% 0 0 0;
+    border-left: 6px solid var(--green);
+    position: relative;
+    transform-origin: left bottom;
+    transition: border-color 0.2s ease;
+}
+
+.hojita {
+    width: 70px;
+    height: 20px;
+    border-radius: 50%;
+    border-top: 6px solid var(--green);
+    position: absolute;
+    transition: border-color 0.2s ease;
+}
+
+/* Posiciones de las partes de la hoja */
+.hojita-1 { top: -25px; left: -20px; transform: rotate(98deg); }
+.hojita-2 { top: -20px; left: -35px; border-top-width: 8px; transform: rotate(75deg); }
+.hojita-3 { left: -45px; border-top-width: 10px; transform: rotate(60deg); }
+.hojita-4 { width: 70px; top: 20px; left: -55px; border-top-width: 10px; transform: rotate(45deg); }
+.hojita-5 { top: 40px; left: -60px; border-top-width: 10px; transform: rotate(30deg); }
+.hojita-6 { width: 80px; top: 60px; left: -75px; border-top-width: 10px; transform: rotate(20deg); }
+.hojita-7 { width: 80px; top: 80px; left: -80px; border-top-width: 8px; transform: rotate(15deg); }
+.hojita-8 { width: 100px; top: 100px; left: -100px; border-radius: 100%; border-top-width: 8px; transform: rotate(13deg); }
+.hojita-9 { width: 90px; top: 122px; left: -90px; border-top-width: 5px; transform: rotate(18deg); }
+.hojita-10 { width: 80px; top: 140px; left: -80px; border-top-width: 6px; transform: rotate(20deg); }
+.hojita-11 { width: 80px; top: 160px; left: -80px; border-top-width: 8px; transform: rotate(22deg); }
+.hojita-12 { top: 0px; left: 5px; transform: rotate(-30deg); }
+.hojita-13 { top: 20px; left: 5px; border-top-width: 5px; transform: rotate(-20deg); }
+.hojita-14 { top: 40px; left: 5px; border-top-width: 7px; transform: rotate(-15deg); }
+.hojita-15 { width: 80px; top: 60px; left: 3px; border-top-width: 10px; transform: rotate(-15deg); }
+.hojita-16 { width: 90px; top: 83px; left: 2px; border-top-width: 10px; transform: rotate(-13deg); }
+.hojita-17 { width: 100px; top: 105px; left: 0px; border-top-width: 10px; transform: rotate(-12deg); }
+.hojita-18 { width: 90px; top: 130px; left: 0px; border-top-width: 8px; transform: rotate(-5deg); }
+.hojita-19 { width: 70px; top: 150px; left: 0px; border-top-width: 6px; transform: rotate(-5deg); }
+.hojita-20 { width: 60px; top: 170px; left: 0px; border-top-width: 5px; transform: rotate(-5deg); }
+
+/* =========================================
+   8. POSICIONAMIENTO DE LAS HOJAS (ESQUINAS)
+   ========================================= */
+/* Arriba a la izquierda */
+.hoja-1 { position: absolute; transform-origin: center bottom; top: -195px; left: -23px; transform: rotate(150deg); filter: brightness(0.7); z-index: -1; }
+.hoja-2 { position: absolute; transform-origin: center bottom; top: -195px; left: 30px; transform: rotate(130deg); z-index: 10; }
+.hoja-3 { position: absolute; transform-origin: center bottom; top: -195px; left: 50px; transform: rotate(90deg); filter: brightness(0.4); z-index: -2; }
+
+/* Arriba a la derecha */
+.hoja-4 { position: absolute; transform-origin: center bottom; top: -195px; right: -10px; transform: rotate(230deg); filter: brightness(0.4); z-index: -2; }
+.hoja-5 { position: absolute; transform-origin: center bottom; top: -205px; right: 70px; transform: rotate(200deg); z-index: 10; }
+.hoja-6 { position: absolute; transform-origin: center bottom; top: -200px; right: 90px; transform: rotate(250deg) scaleX(-1); filter: brightness(0.7); z-index: -1; }
+
+/* Abajo a la izquierda */
+.hoja-7 { position: absolute; transform-origin: center bottom; bottom: 0px; left: 0px; transform: rotate(30deg); filter: brightness(0.7); z-index: -1; }
+.hoja-8 { position: absolute; transform-origin: center bottom; bottom: 0px; left: 30px; transform: rotate(50deg); z-index: 10; }
+.hoja-9 { position: absolute; transform-origin: center bottom; bottom: 0px; left: 50px; transform: rotate(80deg); filter: brightness(0.4); z-index: -2; }
+
+/* Abajo a la derecha */
+.hoja-10 { position: absolute; transform-origin: center bottom; bottom: 0px; right: 0px; transform: rotate(-20deg); filter: brightness(0.4); z-index: -2; }
+.hoja-11 { position: absolute; transform-origin: center bottom; bottom: 0px; right: 30px; transform: rotate(-40deg) scaleX(-1); z-index: 10; }
+.hoja-12 { position: absolute; transform-origin: center bottom; bottom: 0px; right: 50px; transform: rotate(-80deg) scaleX(-1); filter: brightness(0.7); z-index: -1; }
+
+/* =========================================
+   ESTILOS DE LA CARTA SECRETA (MODAL)
+   ========================================= */
+
+/* El botón del corazón en la esquina */
+.carta-trigger {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    opacity: 0.5; /* Semi-transparente para ser discreto */
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.carta-trigger:hover {
+    opacity: 1;
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 5px var(--green));
+}
+
+/* El fondo oscuro que cubre toda la pantalla */
+.modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85); /* Fondo muy oscuro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000; /* Por encima de TODO */
+    opacity: 0;
+    pointer-events: none; /* No bloquea clics si está oculto */
+    transition: opacity 0.4s ease;
+    padding: 20px;
+    backdrop-filter: blur(5px); /* Efecto de desenfoque bonito */
+}
+
+/* Clase para activar el modal (la agrega JS) */
+.modal-container.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* La caja que contiene el texto de la carta */
+.modal-content {
+    background: #22233f; /* Mismo color del reproductor */
+    padding: 40px;
+    border-radius: 20px;
+    max-width: 600px;
+    width: 100%;
+    color: white;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transform: translateY(30px); /* Empieza un poco más abajo */
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Efecto rebote suave */
+}
+
+.modal-container.active .modal-content {
+    transform: translateY(0); /* Sube a su posición original */
+}
+
+/* Botón de cerrar (X) */
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 30px;
+    color: #aaa;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-btn:hover { color: white; }
+
+/* Tipografía de la carta */
+.modal-content h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    margin-bottom: 25px;
+    color: var(--green);
+}
+
+.carta-texto p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    font-weight: 300;
+}
+
+.firma {
+    margin-top: 30px;
+    font-style: italic;
+    text-align: right;
+}

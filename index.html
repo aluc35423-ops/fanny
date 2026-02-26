@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Songs from my heart</title>
+  <link rel="icon" href="/static/img/fanny.ico" type="image/png">
+  <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    <audio id="musicPlayer"></audio>
+
+    <div class="main">
+        <div class="reproductor">
+            <button id="letterBtn" class="carta-trigger" title="Un mensaje para ti">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+            </button>
+            <p>Songs from my heart</p>
+            
+            <div class="disc">
+                <img id="songCover" src="" alt="Portada">
+            </div>
+            
+            <div class="info">
+                <h1 id="songTitle">Cargando...</h1>
+                <p id="songArtist">Cargando...</p>
+                <p id="songMessage" class="mensaje-oculto"></p>
+            </div>
+            
+            <div class="progress-wrapper">
+                <span id="currentTime">0:00</span>
+                <input type="range" id="progressBar" value="0" min="0" max="100" step="0.1">
+                <span id="durationTime">0:00</span>
+            </div>
+
+            <div class="controles-musica">
+                <button id="prevBtn" class="control-btn mini">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                        <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
+                    </svg>
+                </button>
+
+                <button id="playPauseBtn" class="control-btn paused">
+                    <svg class="play-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M8 5V19L19 12L8 5Z" fill="white"/>
+                    </svg>
+                    <svg class="pause-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M6 4H10V20H6V4ZM14 4H18V20H14V4Z" fill="white"/>
+                    </svg>
+                </button>
+
+                <button id="nextBtn" class="control-btn mini">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                        <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <canvas id="canvas"></canvas>
+
+    <div class="hojas-container"> 
+        <div class="hoja-1">
+            <div class="hoja">
+                <div class="hojita hojita-1"></div>
+                <div class="hojita hojita-2"></div><div class="hojita hojita-3"></div><div class="hojita hojita-4"></div><div class="hojita hojita-5"></div><div class="hojita hojita-6"></div><div class="hojita hojita-7"></div><div class="hojita hojita-8"></div><div class="hojita hojita-9"></div><div class="hojita hojita-10"></div><div class="hojita hojita-11"></div>
+                <div class="hojita hojita-12"></div><div class="hojita hojita-13"></div><div class="hojita hojita-14"></div><div class="hojita hojita-15"></div><div class="hojita hojita-16"></div><div class="hojita hojita-17"></div><div class="hojita hojita-18"></div><div class="hojita hojita-19"></div><div class="hojita hojita-20"></div>
+            </div>
+        </div>
+        <div class="hoja-2">
+            <div class="hoja">
+                <div class="hojita hojita-1"></div>
+                <div class="hojita hojita-2"></div><div class="hojita hojita-3"></div><div class="hojita hojita-4"></div><div class="hojita hojita-5"></div><div class="hojita hojita-6"></div><div class="hojita hojita-7"></div><div class="hojita hojita-8"></div><div class="hojita hojita-9"></div><div class="hojita hojita-10"></div><div class="hojita hojita-11"></div>
+                <div class="hojita hojita-12"></div><div class="hojita hojita-13"></div><div class="hojita hojita-14"></div><div class="hojita hojita-15"></div><div class="hojita hojita-16"></div><div class="hojita hojita-17"></div><div class="hojita hojita-18"></div><div class="hojita hojita-19"></div><div class="hojita hojita-20"></div>
+            </div>
+        </div>
+        <div class="hoja-3">
+            <div class="hoja">
+                <div class="hojita hojita-1"></div>
+                <div class="hojita hojita-2"></div><div class="hojita hojita-3"></div><div class="hojita hojita-4"></div><div class="hojita hojita-5"></div><div class="hojita hojita-6"></div><div class="hojita hojita-7"></div><div class="hojita hojita-8"></div><div class="hojita hojita-9"></div><div class="hojita hojita-10"></div><div class="hojita hojita-11"></div>
+                <div class="hojita hojita-12"></div><div class="hojita hojita-13"></div><div class="hojita hojita-14"></div><div class="hojita hojita-15"></div><div class="hojita hojita-16"></div><div class="hojita hojita-17"></div><div class="hojita hojita-18"></div><div class="hojita hojita-19"></div><div class="hojita hojita-20"></div>
+            </div>
+        </div>
+        <div class="hoja-4">
+            <div class="hoja">
+                <div class="hojita hojita-1"></div>
+                <div class="hojita hojita-2"></div><div class="hojita hojita-3"></div><div class="hojita hojita-4"></div><div class="hojita hojita-5"></div><div class="hojita hojita-6"></div><div class="hojita hojita-7"></div><div class="hojita hojita-8"></div><div class="hojita hojita-9"></div><div class="hojita hojita-10"></div><div class="hojita hojita-11"></div>
+                <div class="hojita hojita-12"></div><div class="hojita hojita-13"></div><div class="hojita hojita-14"></div><div class="hojita hojita-15"></div><div class="hojita hojita-16"></div><div class="hojita hojita-17"></div><div class="hojita hojita-18"></div><div class="hojita hojita-19"></div><div class="hojita hojita-20"></div>
+            </div>
+        </div>
+        <div class="hoja-5">
+            <div class="hoja">
+                <div class="hojita hojita-1"></div>
+                <div class="hojita hojita-2"></div><div class="hojita hojita-3"></div><div class="hojita hojita-4"></div><div class="hojita hojita-5"></div><div class="hojita hojita-6"></div><div class="hojita hojita-7"></div><div class="hojita hojita-8"></div><div class="hojita hojita-9"></div><div class="hojita hojita-10"></div><div class="hojita hojita-11"></div>
+                <div class="hojita hojita-12"></div><div class="hojita hojita-13"></div><div class="hojita hojita-14"></div><div class="hojita hojita-15"></div><div class="hojita hojita-16"></div><div class="hojita hojita-17"></div><div class="hojita hojita-18"></div><div class="hojita hojita-19"></div><div class="hojita hojita-20"></div>
+            </div>
+        </div>
+        <div class="hoja-6">
+            <div class="hoja">
+                <div class="hojita hojita-1"></div>
+                <div class="hojita hojita-2"></div><div class="hojita hojita-3"></div><div class="hojita hojita-4"></div><div class="hojita hojita-5"></div><div class="hojita hojita-6"></div><div class="hojita hojita-7"></div><div class="hojita hojita-8"></div><div class="hojita hojita-9"></div><div class="hojita hojita-10"></div><div class="hojita hojita-11"></div>
+                <div class="hojita hojita-12"></div><div class="hojita hojita-13"></div><div class="hojita hojita-14"></div><div class="hojita hojita-15"></div><div class="hojita hojita-16"></div><div class="hojita hojita-17"></div><div class="hojita hojita-18"></div><div class="hojita hojita-19"></div><div class="hojita hojita-20"></div>
+            </div>
+        </div>
+        <div class="hoja-7">
+            <div class="hoja">
+                <div class="hojita hojita-1"></div>
+                <div class="hojita hojita-2"></div><div class="hojita hojita-3"></div><div class="hojita hojita-4"></div><div class="hojita hojita-5"></div><div class="hojita hojita-6"></div><div class="hojita hojita-7"></div><div class="hojita hojita-8"></div><div class="hojita hojita-9"></div><div class="hojita hojita-10"></div><div class="hojita hojita-11"></div>
+                <div class="hojita hojita-12"></div><div class="hojita hojita-13"></div><div class="hojita hojita-14"></div><div class="hojita hojita-15"></div><div class="hojita hojita-16"></div><div class="hojita hojita-17"></div><div class="hojita hojita-18"></div><div class="hojita hojita-19"></div><div class="hojita hojita-20"></div>
+            </div>
+        </div>
+        <div class="hoja-8">
+            <div class="hoja">
+                <div class="hojita hojita-1"></div>
+                <div class="hojita hojita-2"></div><div class="hojita hojita-3"></div><div class="hojita hojita-4"></div><div class="hojita hojita-5"></div><div class="hojita hojita-6"></div><div class="hojita hojita-7"></div><div class="hojita hojita-8"></div><div class="hojita hojita-9"></div><div class="hojita hojita-10"></div><div class="hojita hojita-11"></div>
+                <div class="hojita hojita-12"></div><div class="hojita hojita-13"></div><div class="hojita hojita-14"></div><div class="hojita hojita-15"></div><div class="hojita hojita-16"></div><div class="hojita hojita-17"></div><div class="hojita hojita-18"></div><div class="hojita hojita-19"></div><div class="hojita hojita-20"></div>
+            </div>
+        </div>
+        <div class="hoja-9">
+            <div class="hoja">
+                <div class="hojita hojita-1"></div>
+                <div class="hojita hojita-2"></div><div class="hojita hojita-3"></div><div class="hojita hojita-4"></div><div class="hojita hojita-5"></div><div class="hojita hojita-6"></div><div class="hojita hojita-7"></div><div class="hojita hojita-8"></div><div class="hojita hojita-9"></div><div class="hojita hojita-10"></div><div class="hojita hojita-11"></div>
+                <div class="hojita hojita-12"></div><div class="hojita hojita-13"></div><div class="hojita hojita-14"></div><div class="hojita hojita-15"></div><div class="hojita hojita-16"></div><div class="hojita hojita-17"></div><div class="hojita hojita-18"></div><div class="hojita hojita-19"></div><div class="hojita hojita-20"></div>
+            </div>
+        </div>
+        <div class="hoja-10">
+            <div class="hoja">
+                <div class="hojita hojita-1"></div>
+                <div class="hojita hojita-2"></div><div class="hojita hojita-3"></div><div class="hojita hojita-4"></div><div class="hojita hojita-5"></div><div class="hojita hojita-6"></div><div class="hojita hojita-7"></div><div class="hojita hojita-8"></div><div class="hojita hojita-9"></div><div class="hojita hojita-10"></div><div class="hojita hojita-11"></div>
+                <div class="hojita hojita-12"></div><div class="hojita hojita-13"></div><div class="hojita hojita-14"></div><div class="hojita hojita-15"></div><div class="hojita hojita-16"></div><div class="hojita hojita-17"></div><div class="hojita hojita-18"></div><div class="hojita hojita-19"></div><div class="hojita hojita-20"></div>
+            </div>
+        </div>
+        <div class="hoja-11">
+            <div class="hoja">
+                <div class="hojita hojita-1"></div>
+                <div class="hojita hojita-2"></div><div class="hojita hojita-3"></div><div class="hojita hojita-4"></div><div class="hojita hojita-5"></div><div class="hojita hojita-6"></div><div class="hojita hojita-7"></div><div class="hojita hojita-8"></div><div class="hojita hojita-9"></div><div class="hojita hojita-10"></div><div class="hojita hojita-11"></div>
+                <div class="hojita hojita-12"></div><div class="hojita hojita-13"></div><div class="hojita hojita-14"></div><div class="hojita hojita-15"></div><div class="hojita hojita-16"></div><div class="hojita hojita-17"></div><div class="hojita hojita-18"></div><div class="hojita hojita-19"></div><div class="hojita hojita-20"></div>
+            </div>
+        </div>
+        <div class="hoja-12">
+            <div class="hoja">
+                <div class="hojita hojita-1"></div>
+                <div class="hojita hojita-2"></div><div class="hojita hojita-3"></div><div class="hojita hojita-4"></div><div class="hojita hojita-5"></div><div class="hojita hojita-6"></div><div class="hojita hojita-7"></div><div class="hojita hojita-8"></div><div class="hojita hojita-9"></div><div class="hojita hojita-10"></div><div class="hojita hojita-11"></div>
+                <div class="hojita hojita-12"></div><div class="hojita hojita-13"></div><div class="hojita hojita-14"></div><div class="hojita hojita-15"></div><div class="hojita hojita-16"></div><div class="hojita hojita-17"></div><div class="hojita hojita-18"></div><div class="hojita hojita-19"></div><div class="hojita hojita-20"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="letterModal" class="modal-container">
+        <div class="modal-content">
+            <span id="closeModal" class="close-btn">&times;</span>
+            <h2>Fanny...</h2>
+            <div class="carta-texto">
+                <p>Hola,</p>
+                <p>Quise hacerte este pequeño reproductor porque la música es una de las formas más bonitas que tengo para decir lo que siento.</p>
+                <p>Cada canción en esta lista la elegí pensando en ti, en algún momento que compartimos o simplemente porque su letra me recuerda a ti.</p>
+                <p>Espero que cuando escuches esto, sientas un poquito de todo el cariño con el que lo programé para ti.</p>
+                <p>Tranquila, no te volvere a molestar más.</p>
+                <p>Solo quiero que sepas que cada vista tuya en cada día de mi vida es un regalo muy bonito, gracias por haberme regalado un poquito de tu persona.</p>
+                <p class="firma">Con todo mi corazón,<br>Ulises</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="static/script.js"></script>
+</body>
+</html>

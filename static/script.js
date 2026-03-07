@@ -3,11 +3,81 @@
 // =========================================
 const playlist = [
     {
+        title: "Viento",
+        artist: "Caifanes",
+        audioSrc: "static/music/viento.mp3",
+        coverSrc: "static/img/viento.avif",
+        message: "Prestame tu peine, y peiname el alma.",
+        isSpecial: true
+    },
+    {
+        title: "La Célula Que Explota",
+        artist: "Caifanes",
+        audioSrc: "static/music/explota.mp3",
+        coverSrc: "static/img/explota.avif",
+        message: "Esta canción grita todo lo que siento por ti",
+    },
+    {
+        title: "El club de la montaña",
+        artist: "Bandalos Chinos",
+        audioSrc: "static/music/club.mp3",
+        coverSrc: "static/img/bach.avif",
+        message: "El día se va y no se dónde vas a estar mañana",
+        isSpecial: true
+    },
+    {
+        title: "Hard To Love",
+        artist: "The Drums",
+        audioSrc: "static/music/hard.mp3",
+        coverSrc: "static/img/money.avif",
+        message: "¿Por qué cuando te miro siento que quiero morir?",
+        isSpecial: true
+    },
+    {
+        title: "I Don't Know How To Love",
+        artist: "The Drums",
+        audioSrc: "static/music/I.mp3",
+        coverSrc: "static/img/money.avif",
+        message: "Gracias por revivirme",
+        isSpecial: true
+    },
+    {
+        title: "Los Dioses Ocultos",
+        artist: "Caifanes",
+        audioSrc: "static/music/dioses.mp3",
+        coverSrc: "static/img/explota.avif",
+        message: "Supe que existia un dios allá arriba el día que tuve la suerte de coincidir contigo.",
+        isSpecial: true
+    },
+    {
+        title: "Cuéntame Tu Vida",
+        artist: "Caifanes",
+        audioSrc: "static/music/vida.mp3",
+        coverSrc: "static/img/viento.avif",
+        message: "Podría sentarme a tu lado y pasarme horas escuchándote hablar de cualquier cosa.",
+    },
+    {
+        title: "Espérame feat. Elastic Bond",
+        artist: "Los Amigos Invisibles",
+        audioSrc: "static/music/esperame.mp3",
+        coverSrc: "static/img/lai.avif",
+        message: "Si eras tú quien me imaginaba",
+    },
+    {
         title: "Desvelado",
         artist: "Bobby Pulido",
         audioSrc: "static/music/desvelado.mp3",
         coverSrc: "static/img/desvelado.avif",
-        message: "Para todas esas noches que me quedé pensando en ti..."
+        message: "Para todas esas noches que me quedé pensando en ti...",
+        isSpecial: true
+    },
+    {
+        title: "Estoy Azulado",
+        artist: "Soda Stereo",
+        audioSrc: "static/music/azulado.mp3",
+        coverSrc: "static/img/azulado.avif",
+        message: "Tú si fueras una intro:",
+        isSpecial: true
     },
     {
         title: "2 AM",
@@ -15,6 +85,45 @@ const playlist = [
         audioSrc: "static/music/2am.mp3",
         coverSrc: "static/img/2am.avif",
         message: "Porque a esta hora mi mente siempre viaja hacia donde estás tú.",
+        isSpecial: true
+    },
+    {
+        title: "Love Song",
+        artist: "Biting Elbows",
+        audioSrc: "static/music/lovesong.mp3",
+        coverSrc: "static/img/ls.avif",
+        message: "Así se debe de sentir vivirte",
+    },
+    {
+        title: "Luna",
+        artist: "Zoé",
+        audioSrc: "static/music/luna.mp3",
+        coverSrc: "static/img/zoe.avif",
+        message: "Porque en tus ojos habitan hermosas lunas",
+        isSpecial: true
+    },
+    {
+        title: "Soñe",
+        artist: "Zoé",
+        audioSrc: "static/music/soñe.mp3",
+        coverSrc: "static/img/zoe.avif",
+        message: "Todo el tiempo estoy pensando en ti.",
+        isSpecial: true
+    },
+    {
+        title: "Sabor a Chocolate",
+        artist: "Elefante",
+        audioSrc: "static/music/chocolate.mp3",
+        coverSrc: "static/img/chocolate.avif",
+        message: "Renataaaaa 🗣️.",
+        isSpecial: true
+    },
+    {
+        title: "Trátame Suavemente",
+        artist: "Soda Stereo",
+        audioSrc: "static/music/suavemente.mp3",
+        coverSrc: "static/img/ts.avif",
+        message: "No quiero soñar mil veces las mismas cosas, prefiero hacerlas realidad contigo.",
         isSpecial: true
     },
     {
@@ -37,6 +146,14 @@ const playlist = [
         audioSrc: "static/music/amor.mp3",
         coverSrc: "static/img/amor.avif",
         message: "Eres el mejor regalo que alguien podría tener.",
+        isSpecial: true
+    },
+    {
+        title: "Andromeda",
+        artist: "Gorillaz",
+        audioSrc: "static/music/andromeda.mp3",
+        coverSrc: "static/img/.avif",
+        message: "Eres mi andromeda.",
         isSpecial: true
     },
     {
@@ -117,7 +234,7 @@ const playlist = [
         artist: "Tyler, the creator",
         audioSrc: "static/music/ring.mp3",
         coverSrc: "static/img/ring.avif",
-        message: "Se que me dijiste que me alejara, pero te extraño."
+        message: "I know you said not to call u again, but I miss u."
     },
     {
         title: "The Longest Wave",
@@ -135,11 +252,11 @@ const playlist = [
         message: "Esta canción no se explica, se siente."
     },
     {
-        title: "Viento",
-        artist: "Caifanes",
-        audioSrc: "static/music/viento.mp3",
-        coverSrc: "static/img/viento.avif",
-        message: "Peiname el alma.",
+        title: "Una Propuesta",
+        artist: "Bandalos Chinos",
+        audioSrc: "static/music/UnaPropuesta.mp3",
+        coverSrc: "static/img/pro.avif",
+        message: "Baila conmigo, equivocate conmigo",
         isSpecial: true
     },
     {
